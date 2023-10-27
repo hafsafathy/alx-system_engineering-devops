@@ -14,25 +14,21 @@
 #4. Creates a file containing its PID in /var/run/my_process.pid
 #5. Displays "manage_my_process restarted"
 
-if [ "${1}" == "start" ]
-then
-    ./manage_my_process &
-    touch /var/run/my_process.pid
-    echo "$!" > /var/run/my_process.pid
-    echo "manage_my_process started"
-elif [ "${1}" == "stop" ]
-then
-    echo "manage_my_process stopped"
-    kill "$(cat /var/run/my_process.pid)"
-    rm /var/run/my_process.pid
-elif [ "${1}" == "restart" ]
-then
-    kill "$(cat /var/run/my_process.pid)"
-    rm /var/run/my_process.pid
-    ./manage_my_process &
-    touch /var/run/my_process.pid
-    echo "$!" > /var/run/my_process.pid
-    echo "manage_my_process restarted"
-else
-    echo "Usage: manage_my_process {start|stop|restart}"
+case $1 in
+    "start")
+	./manage_my_process & > /var/run/my_process.pid
+	echo 'manage_my_process started';;
+    "restart")
+	id=$(cat /var/run/my_process.pid)
+	kill -s SIGSTOP "$id"
+	rm /var/run/my_process.pid
+	./manage_my_process & > /var/run/my_process.pid
+	echo 'manage_my_process restarted';;
+    "stop")
+	id=$(cat /var/run/my_process.pid)
+	kill -s SIGSTOP "$id"
+	rm /var/run/my_process.pid
+	echo 'manage_my_process stopped';;
+    *)
+	echo 'Usage: manage_my_process {start|stop|restart}';;
 esac
