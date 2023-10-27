@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# kills the 7-highlander process instead of
+# the 4-to_infinity_and_beyond one.
+
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+  trap 'echo "I am invincible!!!"' SIGTERM 
+done
