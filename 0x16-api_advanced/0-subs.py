@@ -12,14 +12,15 @@ def number_of_subscribers(subreddit):
     if subreddit is None or not isinstance(subreddit, str):
         return 0
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    headers = {'User-Agent': 'Custom-User-Agent'}
+    headers = {'User-Agent': '0x16-api_advanced:project:\
+v1.0.0 (by /u/firdaus_cartoon_jr)'}).json()
     response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code == 200:
-        # Extract the number of subscribers from the JSON response
+        """Extract the number of subscribers from the JSON response"""
         data = response.json().get('data', {})
         subscribers = data.get('subscribers', 0)
         return subscribers
     else:
-        # Return 0 for invalid subreddits or other errors
+        """ Return 0 for invalid subreddits or other errors"""
         return 0
 
