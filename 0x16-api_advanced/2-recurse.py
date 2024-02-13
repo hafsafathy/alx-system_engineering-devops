@@ -12,7 +12,7 @@ def recurse(subreddit, hot_list=None, after=None):
     if subreddit is None or not isinstance(subreddit, str):
         return None
 
-    url = "https://www.reddit.com/r/{subreddit}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = { "User-Agent": "0x16-api_advanced:project:\
                  v1.0.0 (by /u/firdaus_cartoon_jr)"
     }
