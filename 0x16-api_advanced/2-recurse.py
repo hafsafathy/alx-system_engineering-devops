@@ -30,7 +30,7 @@ def recurse(subreddit, hot_list=None, after=None):
         for child in children:
             post = child.get('data', {})
             title = post.get('title')
-            hot_list.append(title)
+            hot_list.append(data, title)
 
         after = data.get('after')
         if after:
